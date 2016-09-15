@@ -1,1 +1,0 @@
-json.array! @room_properties, partial: 'room_properties/room_property', as: :room_property

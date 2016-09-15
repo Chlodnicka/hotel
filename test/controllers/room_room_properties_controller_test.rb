@@ -20,7 +20,7 @@ class RoomRoomPropertiesControllerTest < ActionDispatch::IntegrationTest
       post room_room_properties_url, params: { room_room_property: { room_id: @room_room_property.room_id, room_properties_id: @room_room_property.room_properties_id } }
     end
 
-    assert_redirected_to room_room_property_url(RoomRoomProperty.last)
+    assert_redirected_to room_room_property_url(RoomPropertyRoom.last)
   end
 
   test "should show room_room_property" do

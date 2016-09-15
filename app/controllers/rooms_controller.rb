@@ -1,5 +1,8 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_all_room_properties
+  before_action :set_all_room_types
+  before_action :set_bathroom_types
 
   # GET /rooms
   # GET /rooms.json
@@ -19,6 +22,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1/edit
   def edit
+
   end
 
   # POST /rooms
@@ -40,16 +44,30 @@ class RoomsController < ApplicationController
   # PATCH/PUT /rooms/1
   # PATCH/PUT /rooms/1.json
   def update
-    respond_to do |format|
-      if @room.update(room_params)
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
-        format.json { render :show, status: :ok, location: @room }
-      else
-        format.html { render :edit }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+    @room = Room.find(params[:id])
+    if @room.update_attributes(room_params)
+
+      @room.properties_of_rooms.destroy_all
+      @room.room_types.destroy_all
+
+      properties_ids = params[:room][:room_properties].reject { |c| c.empty? }
+      properties = RoomProperty.find(properties_ids)
+      properties.each do |property|
+        @room.properties_of_rooms.create(room_property: property)
       end
+
+      types_ids = params[:room][:type_of_rooms].reject { |c| c.empty? }
+      types = TypeOfRoom.find(types_ids)
+      types.each do |type|
+        @room.room_types.create(type_of_room: type)
+      end
+
+      redirect_to @room
+    else
+      render :edit
     end
   end
+
 
   # DELETE /rooms/1
   # DELETE /rooms/1.json
@@ -62,13 +80,30 @@ class RoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_room
+    @room = Room.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def room_params
-      params.require(:room).permit(:name, :count_of_person, :price, :bathroom, :description, :hotel_place_id)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def room_params
+    params.require(:room).permit(:name, :count_of_person, :price, :bathroom, :description)
+  end
+
+  def set_bathroom_types
+    @bathroom_types = [1 => 'inside the room', 2 => 'outside the room but only to use by room locators', 3 => 'outside the room, available for others']
+  end
+
+  def set_all_room_properties
+    @all_room_properties = RoomProperty.all.map do |property|
+      [property.name, property.id]
     end
+  end
+
+  def set_all_room_types
+    @all_room_types = TypeOfRoom.all.map do |type|
+      [type.name, type.id]
+    end
+  end
+
 end

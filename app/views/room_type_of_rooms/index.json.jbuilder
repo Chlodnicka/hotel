@@ -1,1 +1,0 @@
-json.array! @room_type_of_rooms, partial: 'room_type_of_rooms/room_type_of_room', as: :room_type_of_room

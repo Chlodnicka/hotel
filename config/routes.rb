@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
   end
-  resources :type_of_rooms
-  resources :room_properties
+  resources :type_of_rooms, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :room_properties, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :multimedia_rooms
   resources :multimedia_hotels
   resources :multimedia

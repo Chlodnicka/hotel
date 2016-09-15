@@ -1,15 +1,8 @@
 class RoomPropertiesController < ApplicationController
   before_action :set_room_property, only: [:show, :edit, :update, :destroy]
 
-  # GET /room_properties
-  # GET /room_properties.json
-  def index
-    @room_properties = RoomProperty.all
-  end
-
-  # GET /room_properties/1
-  # GET /room_properties/1.json
   def show
+    redirect_to settings_path
   end
 
   # GET /room_properties/new
@@ -28,8 +21,7 @@ class RoomPropertiesController < ApplicationController
 
     respond_to do |format|
       if @room_property.save
-        format.html { redirect_to @room_property, notice: 'Room property was successfully created.' }
-        format.json { render :show, status: :created, location: @room_property }
+        format.html { redirect_to settings_path, notice: 'Room property was successfully created.' }
       else
         format.html { render :new }
         format.json { render json: @room_property.errors, status: :unprocessable_entity }
@@ -42,8 +34,7 @@ class RoomPropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @room_property.update(room_property_params)
-        format.html { redirect_to @room_property, notice: 'Room property was successfully updated.' }
-        format.json { render :show, status: :ok, location: @room_property }
+        format.html { redirect_to settings_path, notice: 'Room property was successfully updated.' }
       else
         format.html { render :edit }
         format.json { render json: @room_property.errors, status: :unprocessable_entity }
@@ -56,7 +47,7 @@ class RoomPropertiesController < ApplicationController
   def destroy
     @room_property.destroy
     respond_to do |format|
-      format.html { redirect_to room_properties_url, notice: 'Room property was successfully destroyed.' }
+      format.html { redirect_to settings_path, notice: 'Room property was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
