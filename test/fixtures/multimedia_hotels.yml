@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hotel_place: one
+  multimedia: one
+  type_of_display: MyString
+
+two:
+  hotel_place: two
+  multimedia: two
+  type_of_display: MyString

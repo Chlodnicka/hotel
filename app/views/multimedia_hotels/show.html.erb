@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hotel place:</strong>
+  <%= @multimedia_hotel.hotel_place %>
+</p>
+
+<p>
+  <strong>Multimedia:</strong>
+  <%= @multimedia_hotel.multimedia %>
+</p>
+
+<p>
+  <strong>Type of display:</strong>
+  <%= @multimedia_hotel.type_of_display %>
+</p>
+
+<%= link_to 'Edit', edit_multimedia_hotel_path(@multimedia_hotel) %> |
+<%= link_to 'Back', multimedia_hotels_path %>

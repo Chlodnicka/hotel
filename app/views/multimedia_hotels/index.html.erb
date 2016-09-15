@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Multimedia Hotels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hotel place</th>
+      <th>Multimedia</th>
+      <th>Type of display</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @multimedia_hotels.each do |multimedia_hotel| %>
+      <tr>
+        <td><%= multimedia_hotel.hotel_place %></td>
+        <td><%= multimedia_hotel.multimedia %></td>
+        <td><%= multimedia_hotel.type_of_display %></td>
+        <td><%= link_to 'Show', multimedia_hotel %></td>
+        <td><%= link_to 'Edit', edit_multimedia_hotel_path(multimedia_hotel) %></td>
+        <td><%= link_to 'Destroy', multimedia_hotel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Multimedia Hotel', new_multimedia_hotel_path %>

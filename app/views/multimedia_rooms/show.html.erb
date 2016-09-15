@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @multimedia_room.room %>
+</p>
+
+<p>
+  <strong>Multimedia:</strong>
+  <%= @multimedia_room.multimedia %>
+</p>
+
+<p>
+  <strong>Type of display:</strong>
+  <%= @multimedia_room.type_of_display %>
+</p>
+
+<%= link_to 'Edit', edit_multimedia_room_path(@multimedia_room) %> |
+<%= link_to 'Back', multimedia_rooms_path %>

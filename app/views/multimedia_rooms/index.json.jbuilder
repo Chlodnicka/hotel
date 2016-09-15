@@ -1,0 +1,1 @@
+json.array! @multimedia_rooms, partial: 'multimedia_rooms/multimedia_room', as: :multimedia_room

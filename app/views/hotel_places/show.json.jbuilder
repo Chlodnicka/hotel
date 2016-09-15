@@ -1,0 +1,1 @@
+json.partial! "hotel_places/hotel_place", hotel_place: @hotel_place

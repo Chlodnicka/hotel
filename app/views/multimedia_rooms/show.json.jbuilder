@@ -1,0 +1,1 @@
+json.partial! "multimedia_rooms/multimedia_room", multimedia_room: @multimedia_room

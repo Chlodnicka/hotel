@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2016-09-13
+  finish_date: 2016-09-13
+  proper_price: 1.5
+  changed_price: 1.5
+  changed_count_of_person: 1
+  user: one
+  room: one
+
+two:
+  start_date: 2016-09-13
+  finish_date: 2016-09-13
+  proper_price: 1.5
+  changed_price: 1.5
+  changed_count_of_person: 1
+  user: two
+  room: two

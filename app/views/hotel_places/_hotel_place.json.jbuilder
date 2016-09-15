@@ -1,0 +1,2 @@
+json.extract! hotel_place, :id, :name, :street, :numer, :city_code, :city, :phone_numbers, :email_addresses, :description, :user_id, :created_at, :updated_at
+json.url hotel_place_url(hotel_place, format: :json)

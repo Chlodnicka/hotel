@@ -1,0 +1,32 @@
+<%= form_for(multimedia_room) do |f| %>
+  <% if multimedia_room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(multimedia_room.errors.count, "error") %> prohibited this multimedia_room from being saved:</h2>
+
+      <ul>
+      <% multimedia_room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :room_id %>
+    <%= f.text_field :room_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :multimedia_id %>
+    <%= f.text_field :multimedia_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type_of_display %>
+    <%= f.text_field :type_of_display %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+json.partial! "room_type_of_rooms/room_type_of_room", room_type_of_room: @room_type_of_room

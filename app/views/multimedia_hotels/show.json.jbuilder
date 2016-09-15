@@ -1,0 +1,1 @@
+json.partial! "multimedia_hotels/multimedia_hotel", multimedia_hotel: @multimedia_hotel

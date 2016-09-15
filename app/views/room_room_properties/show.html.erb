@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Room:</strong>
+  <%= @room_room_property.room %>
+</p>
+
+<p>
+  <strong>Room properties:</strong>
+  <%= @room_room_property.room_properties %>
+</p>
+
+<%= link_to 'Edit', edit_room_room_property_path(@room_room_property) %> |
+<%= link_to 'Back', room_room_properties_path %>
