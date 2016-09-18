@@ -17,8 +17,23 @@
 
 <p>
   <strong>Bathroom:</strong>
-  <%= @room.bathroom %>
+  <span><%= @bathroom %></span>
 </p>
+
+<p>
+  <strong>Room properties:</strong>
+  <% @room.room_properties.each do |property| %>
+      <span><%= property.name %></span>
+  <% end %>
+</p>
+
+<p>
+  <strong>Room types:</strong>
+  <% @room.type_of_rooms.each do |type| %>
+      <span><%= type.name %></span>
+  <% end %>
+</p>
+
 
 <p>
   <strong>Description:</strong>
@@ -27,4 +42,5 @@
 
 
 <%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<%= link_to 'Back', rooms_path %> |
+<%= link_to 'Gallery', add_photos_rooms_path(@room) %>

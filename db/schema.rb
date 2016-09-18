@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915164149) do
+ActiveRecord::Schema.define(version: 20160918104857) do
 
   create_table "hotel_places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -27,18 +27,17 @@ ActiveRecord::Schema.define(version: 20160915164149) do
 
   create_table "multimedia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
-    t.string   "description"
-    t.string   "url"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.string   "image"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "multimedia_hotels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "hotel_place_id"
     t.integer  "multimedia_id"
-    t.string   "type_of_display"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["hotel_place_id"], name: "index_multimedia_hotels_on_hotel_place_id", using: :btree
     t.index ["multimedia_id"], name: "index_multimedia_hotels_on_multimedia_id", using: :btree
   end
@@ -46,9 +45,8 @@ ActiveRecord::Schema.define(version: 20160915164149) do
   create_table "multimedia_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "room_id"
     t.integer  "multimedia_id"
-    t.string   "type_of_display"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["multimedia_id"], name: "index_multimedia_rooms_on_multimedia_id", using: :btree
     t.index ["room_id"], name: "index_multimedia_rooms_on_room_id", using: :btree
   end

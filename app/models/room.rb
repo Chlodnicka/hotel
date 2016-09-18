@@ -6,4 +6,7 @@ class Room < ApplicationRecord
   has_many :room_types
   has_many :type_of_rooms, :through => :room_types
 
+  has_many :multimedia_rooms
+  has_many :multimedia, :through => :multimedia_rooms
+
 end

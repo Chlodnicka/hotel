@@ -1,8 +1,9 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :destroy, :add_photos, :update_photos]
   before_action :set_all_room_properties
   before_action :set_all_room_types
   before_action :set_bathroom_types
+  before_action :get_bathroom, only: [:show]
 
   # GET /rooms
   # GET /rooms.json
@@ -68,6 +69,26 @@ class RoomsController < ApplicationController
     end
   end
 
+  def add_photos
+    @multimedia = Multimedium.all
+    @conntected_images =  @room.multimedia_rooms.map do |multimedia|
+      multimedia.multimedia_id
+    end
+  end
+
+  def update_photos
+    @room = Room.find(params[:id])
+    @room.multimedia_rooms.destroy_all
+
+    roomgallery_id = params[:roomgallery].reject { |c| c.empty? }
+    images = Multimedium.find(roomgallery_id)
+    images.each do |image|
+      @room.multimedia_rooms.create(multimedia_id: image.id)
+    end
+
+    redirect_to @room
+  end
+
 
   # DELETE /rooms/1
   # DELETE /rooms/1.json
@@ -83,6 +104,12 @@ class RoomsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_room
     @room = Room.find(params[:id])
+    @room_properties = @room.room_properties.map do |property|
+      property.id
+    end
+    @room_types = @room.type_of_rooms.map do |type|
+      type.id
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -91,7 +118,7 @@ class RoomsController < ApplicationController
   end
 
   def set_bathroom_types
-    @bathroom_types = [1 => 'inside the room', 2 => 'outside the room but only to use by room locators', 3 => 'outside the room, available for others']
+    @bathroom_types = [{"id" => 1, "name" => 'inside the room'}, {"id" => 2, "name" => 'outside the room but only to use by room locators'}, {"id" => 3, "name" => 'outside the room, available for others'}]
   end
 
   def set_all_room_properties
@@ -103,6 +130,14 @@ class RoomsController < ApplicationController
   def set_all_room_types
     @all_room_types = TypeOfRoom.all.map do |type|
       [type.name, type.id]
+    end
+  end
+
+  def get_bathroom
+    @bathroom_types.each do |key|
+      if key['id'] == @room.bathroom
+        @bathroom = key['name']
+      end
     end
   end
 

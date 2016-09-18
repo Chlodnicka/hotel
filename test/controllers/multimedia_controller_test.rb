@@ -17,7 +17,7 @@ class MultimediaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create multimedium" do
     assert_difference('Multimedium.count') do
-      post multimedia_url, params: { multimedium: { description: @multimedium.description, name: @multimedium.name, url: @multimedium.url } }
+      post multimedia_url, params: { multimedium: { description: @multimedium.description, image: @multimedium.image, name: @multimedium.name } }
     end
 
     assert_redirected_to multimedium_url(Multimedium.last)
@@ -34,7 +34,7 @@ class MultimediaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update multimedium" do
-    patch multimedium_url(@multimedium), params: { multimedium: { description: @multimedium.description, name: @multimedium.name, url: @multimedium.url } }
+    patch multimedium_url(@multimedium), params: { multimedium: { description: @multimedium.description, image: @multimedium.image, name: @multimedium.name } }
     assert_redirected_to multimedium_url(@multimedium)
   end
 

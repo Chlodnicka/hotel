@@ -73,6 +73,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :settings, 'Settings', settings_path, class: 'special', if: -> { user_signed_in? }
     primary.item :users, 'Account', edit_user_registration_path, if: -> { user_signed_in? }
+    primary.item :multimedia, 'Multimedia', multimedia_path, if: -> { user_signed_in? }
 
     # you can also specify html attributes to attach to this particular level
     # works for all levels of the menu

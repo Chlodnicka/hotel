@@ -1,5 +1,5 @@
 class HotelPlacesController < ApplicationController
-  before_action :set_hotel_place, only: [:show, :edit, :update, :destroy]
+  before_action :set_hotel_place, only: [:show, :edit, :update, :destroy, :add_photos, :update_photos]
 
   def index
     @hotel_place = HotelPlace.first
@@ -26,6 +26,27 @@ class HotelPlacesController < ApplicationController
         format.json { render json: @hotel_place.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def add_photos
+    @multimedia = Multimedium.all
+    @conntected_images = @hotel_place.multimedia_hotels.map do |multimedia|
+      multimedia.multimedia_id
+    end
+  end
+
+  def update_photos
+    @hotel_place = HotelPlace.find(params[:id])
+    @hotel_place.multimedia_hotels.destroy_all
+
+    hotelgallery_id = params[:hotelgallery].reject { |c| c.empty? }
+    images = Multimedium.find(hotelgallery_id)
+    puts images
+    images.each do |image|
+      @hotel_place.multimedia_hotels.create(multimedia_id: image.id)
+    end
+
+    redirect_to @hotel_place
   end
 
   private

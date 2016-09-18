@@ -3,9 +3,7 @@
 one:
   room: one
   multimedia: one
-  type_of_display: MyString
 
 two:
   room: two
   multimedia: two
-  type_of_display: MyString

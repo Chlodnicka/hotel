@@ -10,8 +10,23 @@ Rails.application.routes.draw do
   resources :multimedia_hotels
   resources :multimedia
   resources :reservations, only: [:new, :create, :show, :edit, :update, :cancel]
-  resources :rooms
-  resources :hotel_places, only: [:index, :show, :edit, :update]
+  resources :rooms do
+    collection do
+      get '/add_photos/:id', to: 'rooms#add_photos', as: 'add_photos'
+      post '/update_photos/:id', to: 'rooms#update_photos', as: 'update_photos'
+      put '/update_photos/:id', to: 'rooms#update_photos'
+      patch '/update_photos/:id', to: 'rooms#update_photos'
+    end
+  end
+
+  resources :hotel_places, only: [:index, :show, :edit, :update] do
+    collection do
+      get '/add_photos/:id', to: 'hotel_places#add_photos', as: 'add_photos'
+      post '/update_photos/:id', to: 'hotel_places#update_photos', as: 'update_photos'
+      put '/update_photos/:id', to: 'hotel_places#update_photos'
+      patch '/update_photos/:id', to: 'hotel_places#update_photos'
+    end
+  end
   resources :users
   resources :settings
 

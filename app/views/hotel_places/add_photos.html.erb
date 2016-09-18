@@ -1,0 +1,16 @@
+<%= form_for @hotel_place, :url => {:action => "update_photos"} do |f| %>
+    <% @multimedia.each do |image| %>
+        <div>
+          <% if @conntected_images.include? image.id %>
+              <%= check_box_tag 'hotelgallery[]', image.id, true %>
+          <% else %>
+              <%= check_box_tag 'hotelgallery[]', image.id %>
+          <% end %>
+          <%= image_tag image.image.url %>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

@@ -69,6 +69,6 @@ class MultimediaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def multimedium_params
-      params.require(:multimedium).permit(:name, :description, :url)
+      params.require(:multimedium).permit(:name, :description, :image)
     end
 end

@@ -28,7 +28,7 @@
 
     <div class="field">
       <%= f.label :bathroom %>
-      <%= f.select :bathroom, @bathroom_types %>
+      <%= f.select(:bathroom, options_for_select(@bathroom_types.collect { |p| [p['name'], p['id']] }, @room.bathroom)) %>
     </div>
 
     <div class="field">
@@ -36,14 +36,15 @@
       <%= f.text_area :description %>
     </div>
 
+    <%= @room_properties %>
     <div class="field">
       <%= f.label :room_properties %>
-      <%= f.select(:room_properties, options_for_select(@all_room_properties), {}, {multiple: true, size: 10}) %>
+      <%= f.select(:room_properties, options_for_select(@all_room_properties, @room_properties), {}, {multiple: true, size: 10}) %>
     </div>
 
     <div class="field">
       <%= f.label :type_of_rooms %>
-      <%= f.select(:type_of_rooms, @all_room_types, {}, {multiple: true, size: 10}) %>
+      <%= f.select(:type_of_rooms, options_for_select(@all_room_types, @room_types), {}, {multiple: true, size: 10}) %>
     </div>
 
 
