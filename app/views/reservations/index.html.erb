@@ -10,7 +10,7 @@
       <th>Proper price</th>
       <th>Changed price</th>
       <th>Changed count of person</th>
-      <th>User</th>
+      <th>Email</th>
       <th>Room</th>
       <th colspan="3"></th>
     </tr>
@@ -24,8 +24,8 @@
         <td><%= reservation.proper_price %></td>
         <td><%= reservation.changed_price %></td>
         <td><%= reservation.changed_count_of_person %></td>
-        <td><%= reservation.user %></td>
-        <td><%= reservation.room %></td>
+        <td><%= reservation.email %></td>
+        <td><%= reservation.room.name %></td>
         <td><%= link_to 'Show', reservation %></td>
         <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
         <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

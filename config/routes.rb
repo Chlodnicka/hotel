@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :multimedia_rooms
   resources :multimedia_hotels
   resources :multimedia
-  resources :reservations, only: [:new, :create, :show, :edit, :update, :cancel]
+  resources :reservations do
+    collection do
+      get '/get_room', to: 'reservations#get_room', as: 'get_room'
+    end
+  end
   resources :rooms do
     collection do
       get '/add_photos/:id', to: 'rooms#add_photos', as: 'add_photos'

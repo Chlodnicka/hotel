@@ -1,5 +1,8 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :get_rooms, only: [:new, :create, :edit, :update, :destroy]
+
+  respond_to :json, :html, only: :get_room
 
   # GET /reservations
   # GET /reservations.json
@@ -10,11 +13,18 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   # GET /reservations/1.json
   def show
+
+  end
+
+  def get_room
+    @room = Room.find params[:id]
+    respond_with @room
   end
 
   # GET /reservations/new
   def new
     @reservation = Reservation.new
+    @reservation.status = "created"
   end
 
   # GET /reservations/1/edit
@@ -41,7 +51,8 @@ class ReservationsController < ApplicationController
   # PATCH/PUT /reservations/1.json
   def update
     respond_to do |format|
-      if @reservation.update(reservation_params)
+      @reservation = Reservation.find(params[:id])
+      if @reservation.update_attributes(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { render :show, status: :ok, location: @reservation }
       else
@@ -67,13 +78,20 @@ class ReservationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reservation
-      @reservation = Reservation.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def reservation_params
-      params.require(:reservation).permit(:start_date, :finish_date, :proper_price, :changed_price, :changed_count_of_person, :user_id, :room_id)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def reservation_params
+    params.require(:reservation).permit(:start_date, :finish_date, :changed_price, :proper_price, :changed_count_of_person, :email, :room_id, :status)
+  end
+
+  def get_rooms
+    @rooms = Room.all.map do |type|
+      [type.name, type.id]
     end
+  end
+
 end

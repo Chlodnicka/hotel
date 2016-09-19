@@ -26,13 +26,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @reservation.user %>
-</p>
-
-<p>
   <strong>Room:</strong>
-  <%= @reservation.room %>
+  <%= @reservation.room.name %>
 </p>
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
