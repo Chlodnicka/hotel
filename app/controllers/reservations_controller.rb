@@ -24,7 +24,6 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
-    @reservation.status = "created"
   end
 
   # GET /reservations/1/edit
@@ -35,7 +34,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(reservation_params)
-
+    @reservation.cart = cart
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
@@ -85,7 +84,7 @@ class ReservationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def reservation_params
-    params.require(:reservation).permit(:start_date, :finish_date, :changed_price, :proper_price, :changed_count_of_person, :email, :room_id, :status)
+    params.require(:reservation).permit(:start_date, :finish_date, :changed_price, :proper_price, :changed_count_of_person, :email, :room_id, :cart_id)
   end
 
   def get_rooms
@@ -94,4 +93,7 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def cart
+    @cart ||= session[:cart_id] && Cart.find_by(id: session[:cart_id])
+  end
 end

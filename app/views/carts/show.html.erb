@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Your reservation:</strong>
+  <% @cart.reservations.each do |reservation| %>
+    <div class="reservation">
+      <span><%= reservation.room.name %></span><span><%= reservation.start_date %></span><span><%= reservation.finish_date %></span><span><%= reservation.changed_price %></span>
+    </div>
+<% end %>
+</p>
+
+<%= link_to 'Pay with PayPal via this site', new_order_path%>
+<%= link_to 'Pay with PayPal (via PayPal site)', @cart.paypal_url(room_url)%>
+<%= link_to 'Back', rooms_path %>

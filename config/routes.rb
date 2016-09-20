@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :carts, only: [:index, :show]
   resources :orders do
     collection do
       get '/new/', to: 'orders#new', :as => 'new_order'

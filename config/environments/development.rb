@@ -57,9 +57,9 @@ Rails.application.configure do
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test  # :production when you will use a real Pro Account
     ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
-        login: "",
-        password: "",
-        signature: ""
+        login: "maja.chlodnicka_api1.gmail.com",
+        password: "4HHWGSYBXS8A5M8R",
+        signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31A4ejvAM1doExgi3WXpJjvyVpElPx"
     )
   end
 end

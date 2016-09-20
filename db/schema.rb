@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920144543) do
+ActiveRecord::Schema.define(version: 20160920174859) do
+
+  create_table "carts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "status"
+  end
 
   create_table "hotel_places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -79,8 +86,9 @@ ActiveRecord::Schema.define(version: 20160920144543) do
     t.integer  "room_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.string   "email",                   limit: 45, null: false
-    t.string   "status"
+    t.string   "email",                   limit: 45
+    t.integer  "cart_id"
+    t.index ["cart_id"], name: "fk_rails_1f0957b5ea", using: :btree
     t.index ["room_id"], name: "index_reservations_on_room_id", using: :btree
   end
 
@@ -134,5 +142,6 @@ ActiveRecord::Schema.define(version: 20160920144543) do
   add_foreign_key "multimedia_hotels", "multimedia", column: "multimedia_id"
   add_foreign_key "multimedia_rooms", "multimedia", column: "multimedia_id"
   add_foreign_key "multimedia_rooms", "rooms"
+  add_foreign_key "reservations", "carts"
   add_foreign_key "reservations", "rooms"
 end

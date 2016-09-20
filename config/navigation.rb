@@ -59,6 +59,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #primary.item :users, 'Users', users_path
     primary.item :hotel_places, 'Hotel', hotel_places_path
     primary.item :rooms, 'Rooms', rooms_path
+    primary.item :carts, 'Cart', carts_path
     primary.item :reservations, 'Reservation', reservations_path
 
     # Add an item which has a sub navigation (same params, but with block)
