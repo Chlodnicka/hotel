@@ -1,5 +1,6 @@
 class Reservation < ApplicationRecord
   belongs_to :room
+  has_many :orders
 
   before_create :set_status
 

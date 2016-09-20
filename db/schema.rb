@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919154652) do
+ActiveRecord::Schema.define(version: 20160920144543) do
 
   create_table "hotel_places", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20160919154652) do
     t.datetime "updated_at",    null: false
     t.index ["multimedia_id"], name: "index_multimedia_rooms_on_multimedia_id", using: :btree
     t.index ["room_id"], name: "index_multimedia_rooms_on_room_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "reservation_id"
+    t.string   "ip_address"
+    t.string   "email"
+    t.string   "card_type"
+    t.date     "card_expires_on"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   create_table "properties_of_rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

@@ -1,0 +1,54 @@
+<%= form_for(order) do |f| %>
+    <% if order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+          <ul>
+            <% order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= hidden_field(:order, :reservation_id, :value => params[:reservation_id])%>
+
+    <div class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :card_type %>
+      <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["American Express", "american_express"]] %>
+    </div>
+
+    <div class="field">
+      <%= f.label :card_number %>
+      <%= f.text_field :card_number %>
+    </div>
+
+    <div class="field">
+      <%= f.label :card_verification %>
+      <%= f.text_field :card_verification %>
+    </div>
+
+    <div class="field">
+      <%= f.label :card_expires_on %>
+      <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year + 15), :add_month_numbers => true%>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

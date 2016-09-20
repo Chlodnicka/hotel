@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions'}, :skip => :registerable
+  resources :orders do
+    collection do
+      get '/new/', to: 'orders#new', :as => 'new_order'
+      post '/new', to: 'orders#create', as: 'new_order_create'
+      put '/new', to: 'orders#create'
+      patch '/new', to: 'orders#create'
+    end
+  end
+  devise_for :users, controllers: {sessions: 'users/sessions'}, :skip => :registerable
   as :user do
     get 'users/edit' => 'users/registrations#edit', :as => 'edit_user_registration'
     put 'users' => 'users/registrations#update', :as => 'user_registration'
