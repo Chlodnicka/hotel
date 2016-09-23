@@ -10,5 +10,5 @@
 </p>
 
 <%= link_to 'Pay with PayPal via this site', new_order_path%>
-<%= link_to 'Pay with PayPal (via PayPal site)', @cart.paypal_url(room_url)%>
+<%= link_to 'Pay with PayPal (via PayPal site)', @cart.paypal_url(rooms_path)%>
 <%= link_to 'Back', rooms_path %>

@@ -1,10 +1,10 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show]
+  before_action :set_cart, only: [:show, :index]
 
   # GET /carts
   # GET /carts.json
   def index
-    redirect_to action: "show", id: session[:cart_id]
+    redirect_to action: "show", id: @cart.id
   end
 
   # GET /carts/1
@@ -13,8 +13,12 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cart
-      @cart = Cart.find(params[:id])
-    end
+
+  def set_cart
+    @cart = Cart.find(session[:cart_id])
+  rescue ActiveRecord::RecordNotFound
+    @cart = Cart.create
+    session[:cart_id] = @cart.id
+  end
+
 end

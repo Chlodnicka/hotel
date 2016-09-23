@@ -2,7 +2,6 @@ class Reservation < ApplicationRecord
   belongs_to :room
   belongs_to :cart
   has_many :orders
-  #before_create :update_cart
 
   STATUS_MAP = {
       "created" => "Created",

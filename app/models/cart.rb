@@ -12,17 +12,21 @@ class Cart < ApplicationRecord
   def paypal_url(return_url)
     values = {
         :business => "maja.chlodnicka@student.uj.edu.pl",
-        :cmd => '_xclick',
+        :cmd => '_cart',
         :upload => 1,
         :rm => 2,
         :return => "#{Rails.application.secrets.app_host}#{return_url}",
-        :amount => total_price
-    }values.merge!({
-                       "amount" => unit_price,
-                       "item_name" => name,
-                       "item_number" => id,
-                       "quantity" => '1'
-                   })
-    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?"+values.map {|k,v| "#{k}=#{v}"}.join("&")
+        :invoice => id
+    }
+    reservations.each_with_index do |reservation, key|
+      values.merge!({
+                        "amount_#{key+1}" => reservation.changed_price,
+                        "item_name_#{key+1}" => reservation.room.name,
+                        "item_number_#{key+1}" => reservation.room_id,
+                        "quantity_#{key+1}" => 1
+                    })
+
+    end
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
 end
